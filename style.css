@@ -2,3 +2,14 @@ body{
     background-color: #ff8400;
 }
 
+input{
+
+    width: 100px;
+}
+#calculator-body{
+    display: -moz-grid-group;
+    width: 150px;
+    height: 130px;
+    background-color: black;
+    margin: 20px auto;
+}
