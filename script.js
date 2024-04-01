@@ -1,20 +1,21 @@
 const calculatorDiv=document.querySelector('#calculator-body')
 const input=document.querySelector('#display');
-const numberNine=document.querySelector('.number-nine')
-const numberEight=document.querySelector('.number-eight')
-const numberSeven=document.querySelector('.number-seven')
-const  numberSix=document.querySelector('.number-six')
-const numberFive=document.querySelector('.number-five')
-const numberFour=document.querySelector('.number-four')
-const numberThree=document.querySelector('.number-three')
-const numberTwo=document.querySelector('.number-two')
-const numberOne=document.querySelector('.number-one')
-const zero=document.querySelector('.zero')
+const numberNine=document.querySelector('#number-nine')
+const numberEight=document.querySelector('#number-eight')
+const numberSeven=document.querySelector('#number-seven')
+const  numberSix=document.querySelector('#number-six')
+const numberFive=document.querySelector('#number-five')
+const numberFour=document.querySelector('#number-four')
+const numberThree=document.querySelector('#number-three')
+const numberTwo=document.querySelector('#number-two')
+const numberOne=document.querySelector('#number-one')
+const zero=document.querySelector('#zero')
+const plusSign=document.querySelector('#plus-sign');
+const minusSign=document.querySelector('#minus-sign')
+const divideSign=document.querySelector(('#divide-sign'));
+const multiplySign=document.querySelector('#multiply-sign');
 
-const plusSign=document.querySelector('.plus-sign');
-const minusSign=document.querySelector('.minus-sign')
-const divideSign=document.querySelector(('.divide-sign'));
-const multiplySign=document.querySelector('.multiply-sign');
+input.style.fontSize='2rem'
 
 let firstOperand='';
 let secondOperand='';

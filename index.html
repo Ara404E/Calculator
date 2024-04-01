@@ -7,34 +7,37 @@
     <title>Catulator</title>
 </head>
 <body>
+    
         <div id="calculator-body">    
             <div class="display-div">
                 <input  id="display" readonly>    
 
             </div> 
             <div id="keys">
-                <button onclick="clearDisplay()">AC</button>
-                <button >+/-</button>
-                <button value="%">%</button>
-                <button value="/" class="divide-sign">/</button> <br>
-                <button value="9" class="number-nine" >9</button>
-                <button value="8" class="number-eight" >8</button>
-                <button value="7" class="number-seven" >7</button>
-                <button  value="+" class="plus-sign" >+</button> <br>
-                <button value="6" class="number-six">6</button>
-                <button value="5" class="number-five" >5</button>
-                <button value="4"class="number-four">4</button>
-                <button value="-" class="minus-sign">-</button> <br>
-                <button value="3"class="number-three">3</button>
-                <button value="2"class="number-two">2</button>
-                <button value="1"class="number-one">1</button> 
-                <button value="*" class="multiply-sign">*</button> <br>
-                <button value="0" class="zero">0</button>
-                <button value=".">.</button>
-                <button onclick="equal()">=</button>
+                <button onclick="clearDisplay()" class="sign-btn">AC</button>
+                <button  class="sign-btn">+/-</button>
+                <button value="%" class="sign-btn">%</button>
+                <button value="/" id="divide-sign" class="sign-btn">/</button> 
+                <button value="9" id="number-nine" class="number-btn" >9</button>
+                <button value="8" id="number-eight"  class="number-btn">8</button>
+                <button value="7" id="number-seven" class="number-btn" >7</button>
+                <button value="+" id="plus-sign"  class="sign-btn">+</button> 
+                <button value="6" id="number-six" class="number-btn">6</button>
+                <button value="5" id="number-five"  class="number-btn">5</button>
+                <button value="4"id="number-four" class="number-btn">4</button>
+                <button value="-" id="minus-sign" class="sign-btn">-</button> 
+                <button value="3"id="number-three" class="number-btn">3</button>
+                <button value="2"id="number-two" class="number-btn">2</button>
+                <button value="1"id="number-one" class="number-btn">1</button> 
+                <button value="*" id="multiply-sign" class="sign-btn">*</button> 
+                <button value="0" id="zero" class="number-btn">0</button>
+                <button value="." class="sign-btn">.</button>
+                <button onclick="equal()" class="sign-btn">=</button>
 
             </div>
         </div>
+          <hr> 
+
     
     <script src="script.js"></script>
 </body>
