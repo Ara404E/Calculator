@@ -1,170 +1,203 @@
-const calculatorDiv=document.querySelector('#calculator-body')
-const input=document.querySelector('#display');
-const numberNine=document.querySelector('#number-nine')
-const numberEight=document.querySelector('#number-eight')
-const numberSeven=document.querySelector('#number-seven')
-const  numberSix=document.querySelector('#number-six')
-const numberFive=document.querySelector('#number-five')
-const numberFour=document.querySelector('#number-four')
-const numberThree=document.querySelector('#number-three')
-const numberTwo=document.querySelector('#number-two')
-const numberOne=document.querySelector('#number-one')
-const zero=document.querySelector('#zero')
-const plusSign=document.querySelector('#plus-sign');
-const minusSign=document.querySelector('#minus-sign')
-const divideSign=document.querySelector(('#divide-sign'));
-const multiplySign=document.querySelector('#multiply-sign');
-
-input.style.fontSize='2rem'
-
 let firstOperand='';
 let secondOperand='';
+let operator=''
+let result='';
+let calculationInProgress=true;
 
 
-plusSign.addEventListener('click', e=>{  
-  input.value+=plusSign.value;
-  
-})
-
-minusSign.addEventListener('click', e=>{  
-  input.value+=minusSign.value;
-})
+const display=document.querySelector('#display');
+const displayDiv=document.querySelector('#display-div')
+const calculatorDiv=document.querySelector('#calculator-body');
+const input=document.querySelectorAll('.inputs');
+const acBtn=document.querySelector('#ac-btn');
+const inputSign=document.querySelector('#input-sign');
 
 
-multiplySign.addEventListener('click', e=>{  
-  input.value+=multiplySign.value;
-})
-
-divideSign.addEventListener('click', e=>{  
-  input.value+=divideSign.value;
-})
-
-numberNine.addEventListener('click', e=>{  
-  input.value+=numberNine.value;
-  
-})
-
-numberEight.addEventListener('click', e=>{  
-  input.value+=numberEight.value;
-  
-})
-
-numberSeven.addEventListener('click', e=>{  
-  input.value+=numberSeven.value;
-  
-})
-numberSix.addEventListener('click', e=>{  
-  input.value+=numberSix.value;
-  
-})
-
-numberFive.addEventListener('click', e=>{  
-  input.value+=numberFive.value;
-  
-})
-numberFour.addEventListener('click', e=>{  
-  input.value+=numberFour.value;
-  
-})
-
-numberThree.addEventListener('click', e=>{  
-  input.value+=numberThree.value;
-  
-})
-numberTwo.addEventListener('click', e=>{  
-  input.value+=numberTwo.value;
-  
-})
-numberOne.addEventListener('click', e=>{  
-  input.value+=numberOne.value;
-  
-})
-zero.addEventListener('click', e=>{  
-  input.value+=zero.value;
-  
-})
-
-
-
-function clearDisplay(){
-    return input.value='';
-}
-
-function operator(){
-  let operands='';
-  if(input.value.includes('+')){
-      operands=input.value.split('+');
-    firstOperand=operands[0];
-    secondOperand=operands[1];
+display.style.color='Black';
+display.style.fontSize='32px';
+document.addEventListener('keydown',function(event){
+   const key=event.key;
+  if(!isNaN(key) || key==='.'){
+      if(operator===''){
+        firstOperand+=key;
+        display.value=firstOperand
+      }
+      else{
+        secondOperand+=key;
+        display.value+=secondOperand
+      }
   }
-  else if(input.value.includes('-')){
-       operands=input.value.split('-');
-    firstOperand=operands[0];
-    secondOperand=operands[1];
+  else if(key==='+' || key==='-' || key==='*' || key==='/'){
+    if(result !==''){
+        firstOperand=result;
+      }
+    if(firstOperand!==''){
+      operator=key;
+      display.value=`${firstOperand}${operator}`;
+    }
+    else if(key==='%'){
+      if(result !==''){
+        firstOperand=result;
+      }
+      secondOperand=undefined;
+      firstOperand=parseFloat(firstOperand);
+      result=percentage(firstOperand);
+      display.value=result;
+      firstOperand='';
+      secondOperand='';
+       operator='';
+    } 
+    else if(key==='+/-'){
+      if(result !==''){
+        firstOperand=result;
+      }
+       firstOperand=parseFloat(firstOperand);
+      result=innputSign(firstOperand);
+        display.value=result;
+      firstOperand='';
+      secondOperand='';
+       operator='';
+    }
+    else if(key==='=' || key==='Enter'){
+      if(firstOperand !=='' && secondOperand !=='' && operator!==''){
+        firstOperand=parseFloat(firstOperand);
+        secondOperand=parseFloat(secondOperand);
+        result=operate(firstOperand,secondOperand,operator);
+        if(result=='Infinity'){
+          result='LMAOOO';
+          result='';
+        firstOperand='';
+        secondOperand='';
+         operator='';
+        }
+        display.value=result;
+        result='';
+        firstOperand='';
+        secondOperand='';
+         operator='';
+      }
+    }
+    else if(key==='Escape' || key==='Delete'){
+       result='';
+        firstOperand='';
+        secondOperand='';
+         operator='';
+         display.value='';
+    }
   }
-   else if(input.value.includes('*')){
-       operands=input.value.split('*');
-    firstOperand=operands[0];
-    secondOperand=operands[1];
+});
+
+input.forEach( function (el){
+  el.addEventListener('click', function(){
+    const value=el.value;
+    if(!isNaN(value) || value==='.'){
+        if(operator===''){
+          firstOperand +=value;
+           display.value=firstOperand
+        }
+        else{
+          secondOperand+=value;
+           display.value=secondOperand
+        }
+      }
+         else if(value==="+" || value==="-" || value==="*" || value==="/"){
+          if(result!==''){
+            firstOperand=result;
+          }
+          if(firstOperand !==''){
+            operator=value;
+            display.value=`${firstOperand}${operator}`
+          }
+        }
+      else if(value==="%"){
+         if(result!==''){
+        firstOperand=result;
+      }
+        firstOperand=parseFloat(firstOperand);
+        result=percentage(firstOperand)
+        display.value=result;
+        firstOperand='';
+            secondOperand='';
+            operator='';
+    }  
+         else if(value==="+/-"){
+         if(result!==''){
+        firstOperand=result;
+      }
+        firstOperand=parseFloat(firstOperand);
+        result=innputSign(firstOperand)
+        display.value=result;
+        firstOperand='';
+            secondOperand='';
+            operator='';
+    }  
+      else if(value==='='){
+        if(firstOperand!=='' && secondOperand!=='' && operator!==''){
+            firstOperand=parseFloat(firstOperand);
+            secondOperand=parseFloat(secondOperand);
+            result=operate(firstOperand,secondOperand,operator);
+            if(result=='Infinity'){
+             result='LMAOOO';
+            }
+            display.value=result;
+            firstOperand='';
+            secondOperand='';
+            operator='';
+          } 
+        }
+      }
+    );
+});
+function add(x,y){
+  return x+y;
+}
+
+function subtract(x,y){
+  return x-y;
+}
+
+
+function multiply(x,y){
+  return x*y;
+}
+
+function divide(x,y){
+  return x/y;
+}
+
+function percentage(x){
+  return x/100;
+}
+
+function operate(x,y,op){
+  if(op==='+'){
+    return add(x,y);
   }
-   else if(input.value.includes('/')){
-       operands=input.value.split('/');
-    firstOperand=operands[0];
-    secondOperand=operands[1];
+   else if(op==='-'){
+    return subtract(x,y);
+  }
+  else if(op==='*'){
+    return multiply(x,y);
+  }
+  else if(op==='/'){
+    return divide(x,y);
+  }
+  else if(op==='%'){
+    secondOperand=null;
+    return percentage(x)
   }
 }
 
-function Addition(){
-  operator();
-  let operand1=parseFloat(firstOperand);
-  let operand2=parseFloat(secondOperand);
-
-  let result=operand1+operand2
-  input.value=result
-  return input.value
+function innputSign(x){
+    return x*-1;
 }
 
-function subtraction(){
-  operator();
-  let operand1=parseFloat(firstOperand);
-  let operand2=parseFloat(secondOperand);
 
-  let result=operand1-operand2
-  input.value=result
-  return input.value
-}
+  acBtn.addEventListener('click' , e=>{
+    firstOperand='';
+    secondOperand='';
+    operator='';
+    result='';
+    display.value=''
+  })
 
-function multiplication(){
-  operator();
-  let operand1=parseFloat(firstOperand);
-  let operand2=parseFloat(secondOperand);
-
-  let result=operand1*operand2
-  input.value=result
-  return input.value
-}
-
-function division(){
-  operator();
-  let operand1=parseFloat(firstOperand);
-  let operand2=parseFloat(secondOperand);
-
-  let result=operand1/operand2
-  input.value=result
-  return input.value
-}
-function equal(){
-  if(input.value.includes('+')){
-       Addition()
-    }
-    else if(input.value.includes('-')){
-         subtraction()
-    }
-     else if(input.value.includes('*')){
-         multiplication()
-    }
-     else if(input.value.includes('/')){
-         division()
-    }
-
-}
