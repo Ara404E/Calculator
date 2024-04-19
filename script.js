@@ -2,7 +2,7 @@ let firstOperand='';
 let secondOperand='';
 let operator=''
 let result='';
-let calculationInProgress=true;
+let operation=`${firstOperand}${operator}${secondOperand}`;;
 
 
 const display=document.querySelector('#display');
@@ -11,6 +11,7 @@ const calculatorDiv=document.querySelector('#calculator-body');
 const input=document.querySelectorAll('.inputs');
 const acBtn=document.querySelector('#ac-btn');
 const inputSign=document.querySelector('#input-sign');
+const outPutDiv=document.querySelector('#output');
 
 
 display.style.color='Black';
@@ -27,7 +28,7 @@ document.addEventListener('keydown',function(event){
         display.value+=secondOperand
       }
   }
-  else if(key==='+' || key==='-' || key==='*' || key==='/'){
+  else if(key==='+' || key==='-' || key==='*' ||  key==='/'){
     if(result !==''){
         firstOperand=result;
       }
@@ -58,7 +59,7 @@ document.addEventListener('keydown',function(event){
       secondOperand='';
        operator='';
     }
-    else if(key==='=' || key==='Enter'){
+    else if(key==='=' || key==='Enter' || key==='Return'){
       if(firstOperand !=='' && secondOperand !=='' && operator!==''){
         firstOperand=parseFloat(firstOperand);
         secondOperand=parseFloat(secondOperand);
@@ -136,10 +137,11 @@ input.forEach( function (el){
             firstOperand=parseFloat(firstOperand);
             secondOperand=parseFloat(secondOperand);
             result=operate(firstOperand,secondOperand,operator);
-            if(result=='Infinity'){
+            if( isNaN(result)  || result=='Infinity'){
              result='LMAOOO';
             }
             display.value=result;
+            output.append(operation);
             firstOperand='';
             secondOperand='';
             operator='';
